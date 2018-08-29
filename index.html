@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="website">
+
+<head ng-controller="headCtrl">
+    <base href="/" />
+    <title ng-bind="title||'angular.js sample'">angular.js</title>
+</head>
+
+<body ng-controller="namesCtrl as nc">
+    <p>Click the table headers to change the sorting order:</p>
+
+    <div>
+
+        <table border="1" width="100%">
+            <tr>
+                <th ng-click="nc.orderByMe('name')">Name</th>
+                <th ng-click="nc.orderByMe('country')">Country</th>
+            </tr>
+            <tr ng-repeat="x in nc.names | orderBy: nc.orderName">
+                <td>{{x.name | toLower }}</td>
+                <td>{{x.country}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+</body>
+
+</html>
