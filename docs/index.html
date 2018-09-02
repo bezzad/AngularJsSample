@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html ng-app="website">
+<html ng-app="website" ng-controller="mainCtrl">
 
-<head ng-controller="headCtrl">
+<head>
     <!-- <base href="/" /> -->
     <title ng-bind="title||'angular.js sample'">angular.js</title>
+    <style>
+        input.ng-invalid {
+            background-color: lightcoral;
+        }
+    </style>
 </head>
 
 <body ng-controller="namesCtrl as nc">
+    <h1 ng-click="clickMe()">{{click}}</h1>
+    <h2>{{nullvalue||'Empty...'}}</h2>
 
-    <p>Click the table headers to change the sorting order:</p>
+    <form ng-app="" name="f" ng-init="email = 'test@myweb.com'">
+        Email:<input type="email" name="yemail" ng-model="email" placeholder="Enter Your Email" required>
+        <span ng-bind="email"></span>
+        <p ng-if="f.yemail.$valid" style="color:green;">The email `{{email}}` meets all criteria.</p>
+        <p ng-if="!f.yemail.$valid" style="color:red;">The email value is invalid address.</p>
 
+        <p>Dirty: {{f.yemail.$dirty}} (if true, the value has been changed).</p>
+        <p>Touched: {{f.yemail.$touched}} (if true, the field has been in focus).</p>
+    </form>
+
+    <br/>
+
+    <!-- directive: test-tag -->
+    <div test-tag></div>
+    <div class="test-tag"></div>
+    <test-tag></test-tag>
+
+    <br>
     <div>
-
+        <p>Click the table headers to change the sorting order:</p>
         <table border="1" width="100%">
             <tr>
                 <th ng-click="nc.orderByMe('name')">Name</th>
                 <th ng-click="nc.orderByMe('country')">Country</th>
             </tr>
             <tr ng-repeat="x in nc.names | orderBy:nc.myOrderBy">
-                <td>{{x.name | toLower }}</td>
+                <td>{{x.name | myFormat }}</td>
                 <td>{{x.country}}</td>
+            </tr>
+            <tr ng-repeat="x in nc.names | customOrderBy:nc.myOrderBy">
+                <td>{{x.name }}</td>
+                <td>{{x.country | myFormat}}</td>
             </tr>
         </table>
 
