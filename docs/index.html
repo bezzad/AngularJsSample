@@ -2,7 +2,7 @@
 <html ng-app="website" ng-controller="mainCtrl">
 
 <head>
-    <!-- <base href="/" /> -->
+    <base href="/" />
     <title ng-bind="title||'angular.js sample'">angular.js</title>
     <style>
         input.ng-invalid {
@@ -27,6 +27,8 @@
 
     <br/>
 
+    <img ng-src="{{coverUri}}"/>
+    
     <!-- directive: test-tag -->
     <div test-tag></div>
     <div class="test-tag"></div>
@@ -53,6 +55,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="app.js"></script>
 </body>
 

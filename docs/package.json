@@ -8,13 +8,17 @@
   },
   "homepage": "https://bezzad.github.io/AngularJsSample/",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/bezzad/AngularJsSample.git"
+    "type": "git",
+    "url": "https://github.com/bezzad/AngularJsSample.git"
   },
   "author": "bezzad",
   "license": "GPL-3.0",
   "keywords": [
     "sample",
     "angularjs"
-  ]
+  ],
+  "dependencies": {
+    "angular-ui-router": "^1.0.20",
+    "static": "^2.0.0"
+  }
 }

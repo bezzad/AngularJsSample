@@ -1,12 +1,29 @@
-var app = angular.module('website', []);
+console.log(1234)
 
-app.controller('mainCtrl', function ($scope) {
+var app = angular.module('website', ['ui.router']);
+
+app.config(['$locationProvider', function AppConfig($locationProvider) {    
+
+    // enable html5Mode for pushstate ('#'-less URLs)
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
+
+}]);
+app.controller('mainCtrl', function ($scope, $location, $http) {
+
     $scope.title = "AngularJs v1.6.9 Sample";
     $scope.click = "Click on Me!";
     $scope.clickMe = function () {
-        $scope.click = "Yes";
+        $scope.click = $location.absUrl(); // $location service == window.location
         $scope.nullvalue = '---------------------------------------------------------------------------';
-    }
+    };
+
+
+    $http.get("https://get.taaghche.ir/v1/book/929").then(function (response) {
+        console.log('1',response);
+        $scope.coverUri = response.data.book.coverUri;
+    });
+
 });
 
 app.controller('namesCtrl', function () {
