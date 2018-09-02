@@ -1,9 +1,10 @@
 var app = angular.module('website', []);
+
 app.controller('headCtrl', function ($scope) {
     $scope.title = "AngularJs v1.6.9 Sample";
 });
 
-app.controller('namesCtrl', function () {    
+app.controller('namesCtrl', function ($scope) {
     this.names = [
         { name: 'Jani', country: 'Norway' },
         { name: 'Carl', country: 'Sweden' },
@@ -16,11 +17,11 @@ app.controller('namesCtrl', function () {
         { name: 'Kai', country: 'Norway' }
     ];
     this.orderByMe = function (name) {
-        this.orderName = name;
+        this.myOrderBy = name;
     }
 });
 
-var byProperty = function (prop) {
+function byProperty(prop) {
     return function (a, b) {
         if (typeof a[prop] == "number") {
             return (a[prop] - b[prop]);
@@ -40,5 +41,4 @@ function toLower() {
     return function (name) { return name.toLowerCase(); }
 }
 
-angular.module('website').filter("orderBy", orderBy);
-angular.module("website").filter("toLower", toLower);
+app.filter("toLower", toLower);

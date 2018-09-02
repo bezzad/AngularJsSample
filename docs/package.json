@@ -1,0 +1,20 @@
+{
+  "name": "angularjssample",
+  "version": "1.0.1",
+  "description": "Sample for AngularJs ver1.6.9",
+  "main": "angular.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://bezzad.github.io/AngularJsSample/",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/bezzad/AngularJsSample.git"
+  },
+  "author": "bezzad",
+  "license": "GPL-3.0",
+  "keywords": [
+    "sample",
+    "angularjs"
+  ]
+}
