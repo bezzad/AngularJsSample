@@ -1,0 +1,12 @@
+<table class="w3-table w3-bordered w3-striped">
+    <tr>
+        <th ng-click="nc.orderByMe('id')">ID</th>
+        <th ng-click="nc.orderByMe('name')">Name</th>
+        <th ng-click="nc.orderByMe('country')">Country</th>
+    </tr>
+    <tr ng-repeat="x in nc.names | orderBy:nc.myOrderBy">
+        <td>{{x.id | hexFormat }}</td>
+        <td>{{x.name | myFormat }}</td>
+        <td>{{x.country | uppercase }}</td>
+    </tr>
+</table>

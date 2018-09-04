@@ -8,8 +8,7 @@ app.config(['$locationProvider', function AppConfig($locationProvider) {
 
 }]);
 
-app.controller('mainCtrl', function ($scope, $location, $http, $timeout, $interval, mytime) {
-
+app.controller('mainCtrl', function ($scope, $location, $http) {
     $scope.title = "AngularJs v1.6.9 Sample";
     $scope.click = "Click on Me!";
     $scope.clickMe = function () {
@@ -31,28 +30,24 @@ app.controller('mainCtrl', function ($scope, $location, $http, $timeout, $interv
             console.log('get response', response);
             alert("Something went wrong");
         });
+});
 
-    headerChanger($scope, $timeout);
-
+app.controller('timerCtrl', function ($scope, $timeout, $interval, mytime) {
+    $scope.title = "Welcome to AngularJs Sample";
     $scope.time = new Date().toLocaleTimeString();
     $interval(function () {
         $scope.time = mytime.toLocaleTimeString();
     }, 1000);
-});
 
-app.service("mytime", function () {
-    this.toLocaleTimeString = function () { return new Date().toLocaleTimeString(); }
+    // When the DOM element is removed from the page,
+    // AngularJS will trigger the $destroy event on
+    // the scope. This gives us a chance to cancel any
+    // pending timer that we may have.
+    // $scope.$on("$destroy", function (event) {
+    //         $timeout.cancel(timer);
+    //     }
+    // );
 });
-
-function headerChanger(scope, timeout) {
-    timeout(function () {
-        if (scope.title == "AngularJs")
-            scope.title = "Sample";
-        else
-            scope.title = "AngularJs";
-        headerChanger(scope, timeout);
-    }, 500);
-}
 
 app.controller('namesCtrl', function () {
     this.names = [
@@ -73,24 +68,15 @@ app.controller('namesCtrl', function () {
         { id: 15, name: 'Nason', country: 'Turky', color: "green" },
         { id: 16, name: 'Mali', country: 'USA', color: "black" },
         { id: 17, name: 'Jack', country: 'England', color: "black" },
-        { id: 18, name: 'Jack', country: 'England', color: "black" },
-        { id: 19, name: 'Jack', country: 'England', color: "black" },
-        { id: 20, name: 'Jack', country: 'England', color: "black" },
-        { id: 21, name: 'Jack', country: 'England', color: "black" },
-        { id: 22, name: 'Jack', country: 'England', color: "black" },
-        { id: 23, name: 'Jack', country: 'England', color: "black" },
-        { id: 24, name: 'Jack', country: 'England', color: "black" },
-        { id: 25, name: 'Jack', country: 'England', color: "black" },
-        { id: 26, name: 'Jack', country: 'England', color: "black" },
-        { id: 27, name: 'Jack', country: 'England', color: "black" },
-        { id: 28, name: 'Jack', country: 'England', color: "black" },
-        { id: 29, name: 'Jack', country: 'England', color: "black" },
-        { id: 30, name: 'Jack', country: 'England', color: "black" },
-        { id: 31, name: 'Kai', country: 'Norway', color: "white" }
+        { id: 18, name: 'Kai', country: 'Norway', color: "white" }
     ];
     this.orderByMe = function (name) {
         this.myOrderBy = name;
     }
+});
+
+app.service("mytime", function () {
+    this.toLocaleTimeString = function () { return new Date().toLocaleTimeString(); }
 });
 
 function myFormat() {
@@ -107,28 +93,6 @@ function myFormat() {
     };
 }
 
-function distinct() {
-    return function (list) {
-        var xList = angular.copy(list);
-        for (i = 0; i < xList.length - 1; i++) { // read array
-            for (j = i + 1; j < xList.length; j++) { // read next index of array
-                var iEj = true;
-                for (prop in xList) {  // read object properties
-                    if (prop.toLowerCase() != "id") { // if property is not ID then
-                        if (xList[i][prop] != xList[j][prop]) {
-                            iEj = false;
-                            break;
-                        }
-                    }
-                }
-                if (iEj) {
-                    xList[j--].remove();
-                }
-            }
-        }
-    };
-}
-
 app.service('hexafy', function () {
     this.calc = function (x) {
         return x.toString(16);
@@ -140,7 +104,6 @@ app.filter('hexFormat', ['hexafy', function (hexafy) {
         return hexafy.calc(x);
     };
 }]);
-app.filter("distinct", distinct);
 app.filter("myFormat", myFormat);
 
 
