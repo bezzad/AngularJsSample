@@ -1,0 +1,24 @@
+<form novalidate>
+    <!-- The novalidate attribute is new in HTML5. It disables any default browser validation. -->
+    Pick a topic:
+    <input class="w3-input w3-border" type="radio" ng-model="myVar" value="dogs">Dogs
+    <input class="w3-input w3-border" type="radio" ng-model="myVar" value="tuts">Tutorials
+    <input class="w3-input w3-border" type="radio" ng-model="myVar" value="cars">Cars
+</form>
+<div ng-switch="myVar">
+    <div ng-switch-when="dogs">
+        <h1>Dogs</h1>
+        <p>Welcome to a world of dogs.</p>
+    </div>
+    <div ng-switch-when="tuts">
+        <h1>Tutorials</h1>
+        <p>Learn from examples.</p>
+    </div>
+    <div ng-switch-when="cars">
+        <h1>Cars</h1>
+        <p>Read about cars.</p>
+    </div>
+</div>
+
+<p>The ng-switch directive hides and shows HTML sections depending on the value of the radio buttons.</p>
+<br/>

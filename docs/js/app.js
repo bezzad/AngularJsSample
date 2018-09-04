@@ -1,6 +1,33 @@
-var app = angular.module('website', ['ui.router']);
+var app = angular.module('website', ['ui.router', 'ngRoute']);
 
-app.config(['$locationProvider', function AppConfig($locationProvider) {
+app.config(['$locationProvider', '$routeProvider', '$stateProvider', function AppConfig($locationProvider, $routeProvider, $stateProvider) {
+
+    $routeProvider
+        .when("/", {
+            templateUrl: "views/body.htm"
+        })
+        .when("/table", {
+            templateUrl: "views/table.htm",
+            controller: "namesCtrl",
+            controllerAs: "nc"
+        })
+        .when("/http", {
+            templateUrl: "views/http.htm",
+            controller: "httpCtrl"
+        })
+        .when("/directive", {
+            templateUrl: "views/directive.htm",
+            controller: "mainCtrl"
+        })
+        .when("/component", {
+            templateUrl: "views/component.htm",
+            controller: "mainCtrl"
+        });
+
+    $stateProvider.state("home", {
+        template: "<h3 ng-bind='time'></h3>",
+        controller: "timerCtrl"
+    })
 
     // enable html5Mode for pushstate ('#'-less URLs)
     $locationProvider.html5Mode(true);
@@ -8,17 +35,17 @@ app.config(['$locationProvider', function AppConfig($locationProvider) {
 
 }]);
 
+
+
 app.controller('mainCtrl', function ($scope, $location, $http) {
-    $scope.title = "AngularJs v1.6.9 Sample";
+    $scope.title = "Welcome to AngularJs Sample";
     $scope.click = "Click on Me!";
     $scope.clickMe = function () {
         $scope.link = $location.absUrl(); // $location service == window.location
     };
-    $scope.handleMouse = function (ev) {
-        $scope.x = ev.clientX;
-        $scope.y = ev.clientY;
-    };
+});
 
+app.controller('httpCtrl', function ($scope, $http) {
     $http.get("https://get.taaghche.ir/v1/book/929")
         .then(function (response) {  //First function handles success
             console.log('get response', response);
@@ -30,10 +57,13 @@ app.controller('mainCtrl', function ($scope, $location, $http) {
             console.log('get response', response);
             alert("Something went wrong");
         });
+    $scope.handleMouse = function (ev) {
+        $scope.x = ev.clientX;
+        $scope.y = ev.clientY;
+    };
 });
 
 app.controller('timerCtrl', function ($scope, $timeout, $interval, mytime) {
-    $scope.title = "Welcome to AngularJs Sample";
     $scope.time = new Date().toLocaleTimeString();
     $interval(function () {
         $scope.time = mytime.toLocaleTimeString();

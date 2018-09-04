@@ -1,3 +1,11 @@
+<p>Click the table headers to change the sorting order:</p>
+
+<span>Select your color: </span>
+<select ng-model="selectedColor" ng-options="x.color for x in nc.names">
+    <!-- <option ng-repeat="x in nc.names" value="{{x.color}}" style="color:{{x.color}}">{{x.color}}</option> -->
+</select>
+<span style="color:{{selectedColor.color}}">{{selectedColor.color}}</span>
+
 <table class="w3-table w3-bordered w3-striped">
     <tr>
         <th ng-click="nc.orderByMe('id')">ID</th>
