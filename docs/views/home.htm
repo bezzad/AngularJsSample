@@ -1,0 +1,7 @@
+<div ng-include="'time.htm'" ng-controller="timeCtrl"></div>
+
+<button class="w3-btn w3-green" ng-disabled="mySwitch" ng-click="clickMe()">{{click}}</button><input class="w3-border" type="checkbox"
+    ng-model="mySwitch" />
+<span ng-show="mySwitch">Disabled</span><span ng-hide="mySwitch">Enabled</span>
+<h2>{{link||'Empty...'}}</h2>
+

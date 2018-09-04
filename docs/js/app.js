@@ -4,7 +4,8 @@ app.config(['$locationProvider', '$routeProvider', '$stateProvider', function Ap
 
     $routeProvider
         .when("/", {
-            templateUrl: "views/body.htm"
+            templateUrl: "views/home.htm",
+            controller: "mainCtrl"
         })
         .when("/table", {
             templateUrl: "views/table.htm",
@@ -23,11 +24,6 @@ app.config(['$locationProvider', '$routeProvider', '$stateProvider', function Ap
             templateUrl: "views/component.htm",
             controller: "mainCtrl"
         });
-
-    $stateProvider.state("home", {
-        template: "<h3 ng-bind='time'></h3>",
-        controller: "timerCtrl"
-    })
 
     // enable html5Mode for pushstate ('#'-less URLs)
     $locationProvider.html5Mode(true);
@@ -63,7 +59,7 @@ app.controller('httpCtrl', function ($scope, $http) {
     };
 });
 
-app.controller('timerCtrl', function ($scope, $timeout, $interval, mytime) {
+app.controller('timeCtrl', function ($scope, $timeout, $interval, mytime) {
     $scope.time = new Date().toLocaleTimeString();
     $interval(function () {
         $scope.time = mytime.toLocaleTimeString();
