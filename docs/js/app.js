@@ -1,35 +1,75 @@
 var app = angular.module('website', ['ui.router', 'ngRoute']);
 
-app.config(['$locationProvider', '$routeProvider', '$stateProvider', function AppConfig($locationProvider, $routeProvider, $stateProvider) {
+app.config(['$urlRouterProvider', '$locationProvider', '$routeProvider', '$stateProvider',
+    function AppConfig($urlRouterProvider, $locationProvider, $routeProvider, $stateProvider) {
 
-    $routeProvider
-        .when("/", {
-            templateUrl: "views/home.htm",
-            controller: "mainCtrl"
-        })
-        .when("/table", {
-            templateUrl: "views/table.htm",
-            controller: "namesCtrl",
-            controllerAs: "nc"
-        })
-        .when("/http", {
-            templateUrl: "views/http.htm",
-            controller: "httpCtrl"
-        })
-        .when("/directive", {
-            templateUrl: "views/directive.htm",
-            controller: "mainCtrl"
-        })
-        .when("/component", {
-            templateUrl: "views/component.htm",
-            controller: "mainCtrl"
-        });
+        //$urlRouterProvider.otherwise('/'); // default route
+        // enable html5Mode for pushstate ('#'-less URLs)
+        // $locationProvider.html5Mode(true);
+        // $locationProvider.hashPrefix('!');
 
-    // enable html5Mode for pushstate ('#'-less URLs)
-    $locationProvider.html5Mode(true);
-    $locationProvider.hashPrefix('!');
+        $routeProvider
+            .when("/", {
+                templateUrl: "views/home.htm",
+                controller: "mainCtrl"
+            })
+            .when("/card", {
+                templateUrl: "views/card.htm",
+                controller: "cardCtrl"
+            })
+            .when("/table", {
+                templateUrl: "views/table.htm",
+                controller: "namesCtrl",
+                controllerAs: "nc"
+            })
+            .when("/http", {
+                templateUrl: "views/http.htm",
+                controller: "httpCtrl"
+            })
+            .when("/directive", {
+                templateUrl: "views/directive.htm",
+                controller: "mainCtrl"
+            })
+            .when("/component", {
+                templateUrl: "views/component.htm",
+                controller: "mainCtrl"
+            }).otherwise({
+                template: "<h1>None</h1><p>Nothing has been selected</p>"
+            });;
 
-}]);
+        // $stateProvider.state('home', {
+        //     url: '/',
+        //     templateUrl: 'views/home.htm',
+        //     controller: 'mainCtrl'
+        // })
+        //     .state('card', {
+        //         url: '/card',
+        //         templateUrl: 'views/card.htm',
+        //         controller: 'mainCtrl'
+        //     })
+        //     .state('table', {
+        //         url: '/table',
+        //         templateUrl: 'views/table.htm',
+        //         controller: 'namesCtrl',
+        //         controllerAs: 'nc'
+        //     })
+        //     .state('http', {
+        //         url: '/http',
+        //         templateUrl: 'views/http.htm',
+        //         controller: 'httpCtrl'
+        //     })
+        //     .state('directive', {
+        //         url: '/directive',
+        //         templateUrl: 'views/directive.htm',
+        //         controller: 'mainCtrl'
+        //     })
+        //     .state('component', {
+        //         url: '/component',
+        //         templateUrl: 'views/component.htm',
+        //         controller: 'mainCtrl'
+        //     });
+
+    }]);
 
 
 
@@ -98,6 +138,23 @@ app.controller('namesCtrl', function () {
     ];
     this.orderByMe = function (name) {
         this.myOrderBy = name;
+    }
+});
+
+app.controller('cardCtrl', function ($scope) {
+    $scope.products = ["Milk", "Bread", "Cheese"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) { return; }
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";
+        $scope.products.splice(x, 1);
     }
 });
 
