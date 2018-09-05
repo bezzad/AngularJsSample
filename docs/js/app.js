@@ -71,10 +71,9 @@ app.config(['$locationProvider', '$routeProvider', '$stateProvider',
     }]);
 
 
-
 app.controller('mainCtrl', function ($scope, $location, $http) {
     $scope.title = "Welcome to AngularJs Sample";
-    $scope.click = "Click on Me!";
+    $scope.click = "Show Current URL";
     $scope.clickMe = function () {
         $scope.link = $location.absUrl(); // $location service == window.location
     };

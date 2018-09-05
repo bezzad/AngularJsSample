@@ -1,7 +1,10 @@
 <p>Click the table headers to change the sorting order:</p>
 
+<span ng-show="mySwitch">Disabled</span><span ng-hide="mySwitch">Enabled</span>
+<input class="w3-border" type="checkbox" ng-model="mySwitch" />
+
 <span>Select your color: </span>
-<select ng-model="selectedColor" ng-options="x.color for x in nc.names">
+<select ng-model="selectedColor" ng-options="x.color for x in nc.names" ng-disabled="mySwitch">
     <!-- <option ng-repeat="x in nc.names" value="{{x.color}}" style="color:{{x.color}}">{{x.color}}</option> -->
 </select>
 <span style="color:{{selectedColor.color}}">{{selectedColor.color}}</span>
