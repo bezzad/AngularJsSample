@@ -1,12 +1,11 @@
 var app = angular.module('website', ['ui.router', 'ngRoute']);
 
-app.config(['$urlRouterProvider', '$locationProvider', '$routeProvider', '$stateProvider',
-    function AppConfig($urlRouterProvider, $locationProvider, $routeProvider, $stateProvider) {
+app.config(['$locationProvider', '$routeProvider', '$stateProvider',
+    function AppConfig($locationProvider, $routeProvider, $stateProvider) {
 
-        //$urlRouterProvider.otherwise('/'); // default route
         // enable html5Mode for pushstate ('#'-less URLs)
-        // $locationProvider.html5Mode(true);
-        // $locationProvider.hashPrefix('!');
+        $locationProvider.html5Mode(true);
+        // $locationProvider.hashPrefix('');
 
         $routeProvider
             .when("/", {
@@ -104,15 +103,6 @@ app.controller('timeCtrl', function ($scope, $timeout, $interval, mytime) {
     $interval(function () {
         $scope.time = mytime.toLocaleTimeString();
     }, 1000);
-
-    // When the DOM element is removed from the page,
-    // AngularJS will trigger the $destroy event on
-    // the scope. This gives us a chance to cancel any
-    // pending timer that we may have.
-    // $scope.$on("$destroy", function (event) {
-    //         $timeout.cancel(timer);
-    //     }
-    // );
 });
 
 app.controller('namesCtrl', function () {
@@ -136,6 +126,7 @@ app.controller('namesCtrl', function () {
         { id: 17, name: 'Jack', country: 'England', color: "black" },
         { id: 18, name: 'Kai', country: 'Norway', color: "white" }
     ];
+    this.x = angular.copy(this.names);
     this.orderByMe = function (name) {
         this.myOrderBy = name;
     }

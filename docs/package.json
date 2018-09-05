@@ -19,6 +19,6 @@
   ],
   "dependencies": {
     "angular-ui-router": "^1.0.20",
-    "static": "^2.0.0"
+    "superstatic": "^6.0.1"
   }
 }
