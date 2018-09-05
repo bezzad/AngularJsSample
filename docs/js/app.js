@@ -208,3 +208,10 @@ app.directive("testTag", function () {
         template: "<h1>Made by Element directive!</h1>"
     };
 });
+
+app.directive("showUrl", function () {
+    return {
+        templateUrl: "views/show-url.htm",
+        controller: "mainCtrl"
+    };
+});
